@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novo Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .dialog {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: left;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            color: #666;
+            margin: 5px 0;
+            display: flex;
+            align-items: center;
+        }
+        .button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+        .copy-button {
+            margin-left: 10px;
+            background-color: #ccc;
+            border: none;
+            border-radius: 3px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .copy-button:hover {
+            background-color: #bbb;
+        }
+    </style>
+</head>
+<body>
+    <div class="dialog">
+        <h1>Gerar Novo Usuário e Senha</h1>
+        <p>Clique no botão abaixo para gerar um novo usuário e senha:</p>
+        <button class="button" onclick="gerarDados()">Gerar</button>
+        <div id="dadosAcesso" style="display: none;">
+            <p id="usuario">
+                Usuário: <span id="usuarioSpan"></span>
+                <button class="copy-button" onclick="copiar('usuarioSpan')">Copiar</button>
+            </p>
+            <p id="senha">
+                Senha: <span id="senhaSpan"></span>
+                <button class="copy-button" onclick="copiar('senhaSpan')">Copiar</button>
+            </p>
+            <p id="vencimento">
+                Vencimento: <span id="vencimentoSpan"></span>
+                <button class="copy-button" onclick="copiar('vencimentoSpan')">Copiar</button>
+            </p>
+            <p id="webPlayer">
+                WebPlayer: <a id="webPlayerLink" target="_blank"></a>
+                <button class="copy-button" onclick="copiar('webPlayerLink')">Copiar</button>
+            </p>
+            <p id="dns1">
+                DNS: <a id="dns1Link" target="_blank"></a>
+                <button class="copy-button" onclick="copiar('dns1Link')">Copiar</button>
+            </p>
+            <p id="dns2">
+                DNS Alternativo: <a id="dns2Link" target="_blank"></a>
+                <button class="copy-button" onclick="copiar('dns2Link')">Copiar</button>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function gerarDados() {
+            var usuarios = [
+                { usuario: '9640547929', senha: '1584516060', vencimento: calcularVencimento(30), webPlayer: 'http://player.teambr.live/', dns1: 'http://brpro.live', dns2: 'http://pkweb.ca[DNS Alternativo]' },
+                { usuario: 'volnei.iptv128', senha: '99088816', vencimento: calcularVencimento(30), webPlayer: 'http://player.teambr.live/', dns1: 'http://brpro.live', dns2: 'http://pkweb.ca[DNS Alternativo]' },
+                { usuario: '8432549358', senha: '1026775105', vencimento: calcularVencimento(30), webPlayer: 'http://player.teambr.live/', dns1: 'http://brpro.live', dns2: 'http://pkweb.ca[DNS Alternativo]' },
+                { usuario: '4799858791', senha: '4708578267', vencimento: calcularVencimento(30), webPlayer: 'http://player.teambr.live/', dns1: 'http://brpro.live', dns2: 'http://pkweb.ca[DNS Alternativo]' },
+                { usuario: '8768579355', senha: '1655710490', vencimento: calcularVencimento(30), webPlayer: 'http://player.teambr.live/', dns1: 'http://brpro.live', dns2: 'http://pkweb.ca[DNS Alternativo]' }
+            ];
+
+            var indice = Math.floor(Math.random() * usuarios.length);
+            var usuario = usuarios[indice].usuario;
+            var senha = usuarios[indice].senha;
+            var vencimento = usuarios[indice].vencimento;
+            var webPlayer = usuarios[indice].webPlayer;
+            var dns1 = usuarios[indice].dns1;
+            var dns2 = usuarios[indice].dns2;
+
+            document.getElementById('usuarioSpan').textContent = usuario;
+            document.getElementById('senhaSpan').textContent = senha;
+            document.getElementById('vencimentoSpan').textContent = vencimento;
+            document.getElementById('webPlayerLink').textContent = webPlayer;
+            document.getElementById('webPlayerLink').href = webPlayer;
+            document.getElementById('dns1Link').textContent = dns1;
+            document.getElementById('dns1Link').href = dns1;
+            document.getElementById('dns2Link').textContent = dns2;
+            document.getElementById('dns2Link').href = dns2;
+
+            document.getElementById('dadosAcesso').style.display = 'block';
+        }
+
+        function calcularVencimento(dias) {
+            var dataAtual = new Date();
+            var vencimento = new Date(dataAtual.getTime() + dias * 24 * 60 * 60 * 1000);
+            var dia = vencimento.getDate().toString().padStart(2, '0');
+            var mes = (vencimento.getMonth() + 1).toString().padStart(2, '0');
+            var ano = vencimento.getFullYear();
+            return dia + '/' + mes + '/' + ano;
+        }
+
+        function copiar(id) {
+            var elemento = document.getElementById(id);
+            var texto = elemento.textContent;
+            navigator.clipboard.writeText(texto)
+                .then(function() {
+                    alert('Texto copiado com sucesso!');
+                })
+                .catch(function() {
+                    alert('Erro ao copiar texto!');
+                });
+        }
+    </script>
+</body>
+</html>
+

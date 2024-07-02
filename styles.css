@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .card {
+            width: 48%; /* Ajuste conforme necessário para o espaçamento entre os cards */
+            margin-bottom: 20px; /* Espaçamento entre os cards */
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <input type="checkbox" id="drawer-toggle">
+        <label for="drawer-toggle" class="drawer-toggle-button">&#9776;</label>
+        <div class="drawer">
+            <button class="drawer-button">Novo Usuário</button>
+            <button class="drawer-button">Nova Lista</button>
+        </div>
+        <div class="content">
+            <h2>Dashboard</h2>
+            <div class="cards-container">
+                <div class="card">
+                    <h3>Total de Usuários</h3>
+                    <p id="totalUsers">56</p>
+                </div>
+                <div class="card">
+                    <h3>Total de Novos Usuários</h3>
+                    <p id="newUsers">52</p>
+                </div>
+                <div class="card">
+                    <h3>Usuários Expirados</h3>
+                    <p id="expiredUsers">66</p>
+                </div>
+                <div class="card">
+                    <h3>Usuários Online</h3>
+                    <p id="onlineUsers">83</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

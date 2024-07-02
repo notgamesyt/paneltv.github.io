@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novo Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .dialog {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: left;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            color: #666;
+            margin: 5px 0;
+            display: flex;
+            align-items: center;
+        }
+        .button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+        .copy-button {
+            margin-left: 10px;
+            background-color: #ccc;
+            border: none;
+            border-radius: 3px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .copy-button:hover {
+            background-color: #bbb;
+        }
+    </style>
+</head>
+<body>
+    <div class="dialog">
+        <h1>Gerar Novo Usuário e Senha</h1>
+        <p>Clique no botão abaixo para gerar um novo usuário e senha:</p>
+        <button class="button" onclick="gerarDados()">Gerar</button>
+        <button class="button" onclick="copiarTudo()">Copiar Tudo</button>
+        <div id="dadosAcesso" style="display: none;">
+            <p id="usuario">
+                Usuário: <span id="usuarioSpan"></span>
+                <button class="copy-button" onclick="copiarUsuario()">Copiar</button>
+            </p>
+            <p id="senha">
+                Senha: <span id="senhaSpan"></span>
+                <button class="copy-button" onclick="copiarSenha()">Copiar</button>
+            </p>
+            <p id="vencimento">
+                Vencimento: <span id="vencimentoSpan"></span>
+                <button class="copy-button" onclick="copiarVencimento()">Copiar</button>
+            </p>
+            <p id="webPlayer">
+                WebPlayer: <a id="webPlayerLink" target="_blank"></a>
+                <button class="copy-button" onclick="copiarWebPlayer()">Copiar</button>
+            </p>
+            <p id="dns1">
+                DNS: <a id="dns1Link" target="_blank"></a>
+                <button class="copy-button" onclick="copiarDNS1()">Copiar</button>
+            </p>
+            <p id="dns2">
+                DNS Alternativo: <a id="dns2Link" target="_blank"></a>
+                <button class="copy-button" onclick="copiarDNS2()">Copiar</button>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function gerarDados() {
+            var usuarios = [
+                { usuario: '9640547929', senha: '1584516060', vencimento: '21/04/2024', webPlayer: 'http://player.teambr.live/', dns1: 'http://brpro.live', dns2: 'http://pkweb.ca[DNS Alternativo]' },
+                { usuario: 'volnei.iptv128', senha: '99088816', vencimento: '23/07/2024', webPlayer: 'http://player.teambr.live/', dns1: 'http://brpro.live', dns2: 'http://pkweb.ca[DNS Alternativo]' },
+                { usuario: '8432549358', senha: '1026775105', vencimento: calcularVencimento(30), webPlayer: 'http://player.teambr.live/', dns1: 'http://brpro.live', dns2: 'http://pkweb.ca[DNS Alternativo]' },
+                { usuario: '4799858791', senha: '4708578267', vencimento: calcularVencimento(30), webPlayer: 'http://player.teambr.live/', dns1: 'http://brpro.live', dns2: 'http://pkweb.ca[DNS Alternativo]' },
+                { usuario: '8768579355', senha: '1655710490', vencimento: calcularVencimento(30), webPlayer: 'http://player.teambr.live/', dns1: 'http://brpro.live', dns2: 'http://pkweb.ca[DNS Alternativo]' }
+            ];
+
+            var indice = Math.floor(Math.random() * usuarios.length);
+            var usuario = usuarios[indice].usuario;
+            var senha = usuarios[indice].senha;
+            var vencimento = usuarios[indice].vencimento;
+            var webPlayer = usuarios[indice].webPlayer;
+            var dns1 = usuarios[indice].dns1;
+            var dns2 = usuarios[indice].dns2;
+
+            document.getElementById('usuarioSpan').textContent = usuario;
+            document.getElementById('senhaSpan').textContent = senha;
+            document.getElementById('vencimentoSpan').textContent = vencimento;
+            document.getElementById('webPlayerLink').textContent = webPlayer;
+            document.getElementById('webPlayerLink').href = webPlayer;
+            document.getElementById('dns1Link').textContent = dns1;
+            document.getElementById('dns1Link').href = dns1;
+            document.getElementById('dns2Link').textContent = dns2;
+            document.getElementById('dns2Link').href = dns2;
+
+            document.getElementById('dadosAcesso').style.display = 'block';
+        }
+
+        function copiarUsuario() {
+            var usuario = document.getElementById('usuarioSpan').textContent;
+            navigator.clipboard.writeText(usuario);
+            alert('Usuário copiado para a área de transferência: ' + usuario);
+        }
+
+        function copiarSenha() {
+            var senha = document.getElementById('senhaSpan').textContent;
+            navigator.clipboard.writeText(senha);
+            alert('Senha copiada para a área de transferência: ' + senha);
+        }
+
+        function copiarVencimento() {
+            var vencimento = document.getElementById('vencimentoSpan').textContent;
+            navigator.clipboard.writeText(vencimento);
+            alert('Data de vencimento copiada para a área de transferência: ' + vencimento);
+        }
+
+        function copiarWebPlayer() {
+            var webPlayer = document.getElementById('webPlayerLink').textContent;
+            navigator.clipboard.writeText(webPlayer);
+            alert('WebPlayer copiado para a área de transferência: ' + webPlayer);
+        }
+
+        function copiarDNS1() {
+            var dns1 = document.getElementById('dns1Link').textContent;
+            navigator.clipboard.writeText(dns1);
+            alert('DNS principal copiado para a área de transferência: ' + dns1);
+        }
+
+        function copiarDNS2() {
+            var dns2 = document.getElementById('dns2Link').textContent;
+            navigator.clipboard.writeText(dns2);
+            alert('DNS alternativo copiado para a área de transferência: ' + dns2);
+        }
+
+        function copiarTudo() {
+            var usuario = document.getElementById('usuarioSpan').textContent;
+            var senha = document.getElementById('senhaSpan').textContent;
+            var vencimento = document.getElementById('vencimentoSpan').textContent;
+            var webPlayer = document.getElementById('webPlayerLink').textContent;
+            var dns1 = document.getElementById('dns1Link').textContent;
+            var dns2 = document.getElementById('dns2Link').textContent;
+
+            var textoCopiado = 'Usuário: ' + usuario + '\n' +
+                              'Senha: ' + senha + '\n' +
+                              'Vencimento: ' + vencimento + '\n' +
+                              'WebPlayer: ' + webPlayer + '\n' +
+                              'DNS principal: ' + dns1 + '\n' +
+                              'DNS alternativo: ' + dns2;
+
+            navigator.clipboard.writeText(textoCopiado);
+            alert('Todas as informações foram copiadas para a área de transferência.');
+        }
+
+        function calcularVencimento(dias) {
+            var dataAtual = new Date();
+            var vencimento = new Date(dataAtual.getTime() + dias * 24 * 60 * 60 * 1000);
+            var dia = vencimento.getDate().toString().padStart(2, '0');
+            var mes = (vencimento.getMonth() + 1).toString().padStart(2, '0');
+            var ano = vencimento.getFullYear();
+            return dia + '/' + mes + '/' + ano;
+        }
+    </script>
+</body>
+</html>
+
